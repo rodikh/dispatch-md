@@ -1,9 +1,9 @@
 {
   "userName": "",
   "permissionMode": "acceptEdits",
-  "model": "opus",
-  "thinkingBudget": "medium",
-  "effortLevel": "high",
+  "model": "sonnet",
+  "thinkingBudget": "low",
+  "effortLevel": "medium",
   "enableAutoTitleGeneration": true,
   "excludedTags": [],
   "mediaFolder": "attachments",
