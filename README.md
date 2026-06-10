@@ -1,4 +1,4 @@
-# 🧭 dispatch.md — Your Personal AI Work Assistant (Vault Template)
+# 🧭 dispatch.md — Your Personal AI Work Assistant
 
 dispatch.md turns an [Obsidian](https://obsidian.md) vault into a **work command center** driven by
 [Claude](https://claude.com/claude-code). It tracks your tasks, projects, and meetings, and can
