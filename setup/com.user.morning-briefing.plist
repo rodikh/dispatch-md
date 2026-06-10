@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  macOS LaunchAgent for the daily morning briefing.
+
+  The /setup command fills in the placeholders, renames this file to
+  com.{{LAUNCHD_LABEL}}.morning-briefing.plist, copies it to
+  ~/Library/LaunchAgents/, and loads it with:
+
+      launchctl unload ~/Library/LaunchAgents/com.{{LAUNCHD_LABEL}}.morning-briefing.plist 2>/dev/null
+      launchctl load   ~/Library/LaunchAgents/com.{{LAUNCHD_LABEL}}.morning-briefing.plist
+
+  Edit the StartCalendarInterval entries to match your work days and time.
+  Weekday: 0=Sun 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat.
+  launchd catches up missed jobs when the machine wakes — no missed days.
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+    <key>Label</key>
+    <string>com.{{LAUNCHD_LABEL}}.morning-briefing</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>{{HOME}}/.local/bin/morning-briefing.sh</string>
+    </array>
+
+    <!-- Fire at {{BRIEFING_HOUR}}:{{BRIEFING_MINUTE}} on workdays ({{WORK_DAYS}}) -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>{{BRIEFING_HOUR}}</integer><key>Minute</key><integer>{{BRIEFING_MINUTE}}</integer></dict>
+        <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>{{BRIEFING_HOUR}}</integer><key>Minute</key><integer>{{BRIEFING_MINUTE}}</integer></dict>
+        <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>{{BRIEFING_HOUR}}</integer><key>Minute</key><integer>{{BRIEFING_MINUTE}}</integer></dict>
+        <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>{{BRIEFING_HOUR}}</integer><key>Minute</key><integer>{{BRIEFING_MINUTE}}</integer></dict>
+        <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>{{BRIEFING_HOUR}}</integer><key>Minute</key><integer>{{BRIEFING_MINUTE}}</integer></dict>
+    </array>
+
+    <key>StandardOutPath</key>
+    <string>{{HOME}}/.local/share/morning-briefing.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>{{HOME}}/.local/share/morning-briefing.log</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>{{HOME}}/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>{{HOME}}</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+</dict>
+</plist>

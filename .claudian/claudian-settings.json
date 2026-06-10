@@ -1,0 +1,13 @@
+{
+  "userName": "",
+  "permissionMode": "acceptEdits",
+  "model": "opus",
+  "thinkingBudget": "medium",
+  "effortLevel": "high",
+  "enableAutoTitleGeneration": true,
+  "excludedTags": [],
+  "mediaFolder": "attachments",
+  "systemPrompt": "",
+  "persistentExternalContextPaths": [],
+  "locale": "en"
+}

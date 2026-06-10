@@ -1,0 +1,121 @@
+# 🧭 Claudian — Your Personal AI Work Assistant (Vault Template)
+
+Claudian turns an [Obsidian](https://obsidian.md) vault into a **work command center** driven by
+[Claude](https://claude.com/claude-code). It tracks your tasks, projects, and meetings, and can
+generate a **daily briefing** every morning by pulling from your calendar, email, Slack, GitHub,
+and issue tracker.
+
+This repository is a **clean template**. Everything personal has been stripped out and replaced
+with `{{PLACEHOLDERS}}`. A guided `/setup` command fills them in for you.
+
+---
+
+## 🚀 Quick Start
+
+### 1. Get the vault onto your machine
+- Clone or download this folder somewhere convenient (e.g. `~/Documents/Obsidian/MyJournal`).
+- Open it as a vault in Obsidian: **Open folder as vault** → pick this folder.
+  - Obsidian may ask to trust and enable community plugins (Tasks, Calendar, Kanban, etc.) —
+    say yes. They're pre-listed in `.obsidian/`.
+
+### 2. Open it in Claude
+- Point Claude (Claude Code, or the Claudian Obsidian plugin) at this folder as its working
+  directory. Claude automatically reads `CLAUDE.md` and becomes "Claudian."
+
+### 3. Run the setup command
+```
+/setup
+```
+`/setup` interviews you and does all the wiring:
+- ✍️ Fills in your **name, role, company, and email** across the vault
+- 🔌 Helps you **connect your tools** (Calendar, Gmail, Slack, Drive, GitHub, Jira)
+- ⏰ Optionally installs an **automated daily briefing** at a time you choose
+- 🧹 Offers to clean up the sample content
+
+That's it — you'll have a working personal assistant in a few minutes.
+
+> Prefer to do it by hand? Open `CLAUDE.md` and replace every `{{PLACEHOLDER}}`, then read
+> `Reference/Claudian Setup.md`.
+
+---
+
+## 🔌 Connecting your tools
+
+Claudian is most useful when it can see your real work. Two kinds of connections:
+
+| Tool | How it connects |
+|------|----------------|
+| **Calendar, Gmail, Slack, Google Drive, Jira** | **MCP servers** — authorize them in your Claude client's integrations / MCP settings. `/setup` checks which are already connected. |
+| **GitHub** | The **`gh` CLI** — run `gh auth login` once. Use a fine-grained, **read-only** token. |
+
+You don't need all of them. Pick what you use; `/setup` enables only those in `CLAUDE.md`.
+
+---
+
+## ⏰ The daily briefing
+
+If you enable it during `/setup`, a scheduler runs every workday morning, generates
+`Daily/YYYY-MM-DD.md`, and updates your `Dashboard.md`. The assets live in `setup/`:
+
+- `morning-briefing.sh` — the runner script
+- `morning-briefing-prompt.txt` — the instructions Claude follows to build the briefing
+- `com.user.morning-briefing.plist` — a macOS LaunchAgent template
+
+On macOS these get installed to `~/.local/bin/` and `~/Library/LaunchAgents/`. On Linux, `/setup`
+helps you set up a `cron` job or `systemd --user` timer instead. You can always trigger one
+manually by asking Claudian: **"Run a briefing."**
+
+---
+
+## 📂 What's in here
+
+```
+README.md                ← you are here
+CLAUDE.md                ← Claudian's brain: identity, integrations, rules (templated)
+Dashboard.md             ← your daily home base (starts with a worked example)
+Daily/                   ← one note per day (auto-generated)
+Projects/
+  README.md              ← project index
+  Sample Project.md      ← example project — delete once you have real ones
+  Archive/               ← completed projects
+Notes/                   ← meeting notes & one-offs
+Templates/               ← Daily Briefing / Project / Meeting Note templates
+Reference/
+  Claudian Setup.md      ← the full human-readable guide
+setup/                   ← briefing script, prompt, and scheduler (used by /setup)
+.claude/commands/
+  setup.md               ← the /setup command
+  eod.md                 ← the /eod end-of-day roundup
+```
+
+---
+
+## 💡 Tips for getting the most out of Claudian
+
+1. **Open the Dashboard first thing.** It's the single source of truth for what's in flight.
+2. **Run `/eod` at the end of the day.** A 3-minute interview keeps tomorrow's briefing sharp —
+   it's the difference between a generic summary and one that actually knows your day.
+3. **One task, one place.** Add tasks in the most relevant note (project, meeting, daily). The
+   Tasks plugin surfaces them everywhere. Date the important ones with `📅 YYYY-MM-DD`.
+4. **Make a project note per real thread of work.** Duplicate the Project template. Project notes
+   are where decisions and history live so you don't have to remember them.
+5. **Link aggressively** with `[[wikilinks]]`. The connections make search and the graph useful.
+6. **Keep `CLAUDE.md` current.** When your team, tools, or focus change, update it — stale config
+   means stale briefings. You can just tell Claudian "update my role to X."
+7. **Talk to it in plain language.** "Summarize my open tasks", "What did I decide about auth?",
+   "Create a meeting note for the design review", "Archive the X project."
+8. **Use read-only tokens** and never commit secrets into vault files.
+9. **Don't over-organize early.** Use Daily + Projects + Notes for a couple of weeks before adding
+   more structure.
+
+---
+
+## 🔁 Sharing this with others
+
+To pass this template on, share this folder **before** running `/setup` (or re-clone a fresh copy).
+The committed state is fully generic — no personal data. The `.gitignore` keeps generated daily
+notes, personal Obsidian state, and session history out of version control.
+
+---
+
+Happy organizing. Open `Dashboard.md`, run `/setup`, and meet your assistant. 🤖

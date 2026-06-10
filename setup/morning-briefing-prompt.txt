@@ -1,0 +1,236 @@
+You are {{USER_NAME}}'s personal AI assistant. Generate the daily morning briefing and write it to the vault.
+Vault: {{VAULT_PATH}}
+GitHub: {{GITHUB_USER}}, main repo: {{GITHUB_REPO}}
+
+(Placeholders like {{VAULT_PATH}} are filled in by the /setup command. If you see a raw
+placeholder here, the briefing hasn't been configured yet — run /setup in the vault.)
+
+---
+
+## STEP 1 — Get dates and lookback window
+
+Run in bash:
+  TODAY=$(date '+%Y-%m-%d')
+  TODAY_DISPLAY=$(date '+%A, %B %-d')
+  YESTERDAY=$(date -v-1d '+%Y-%m-%d')
+  TOMORROW=$(date -v+1d '+%Y-%m-%d')
+  DOW=$(date '+%u')   # 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat 7=Sun
+
+  # Adjust the lookback so Monday (or your first workday) covers the whole weekend.
+  # Default: on the first workday of the week, look back to Friday midnight; otherwise 24h.
+  if [ "$DOW" = "1" ]; then
+    SINCE=$(date -v-3d -v0H -v0M -v0S -u '+%Y-%m-%dT%H:%M:%SZ')
+    WINDOW_LABEL="the weekend (Fri–Sun)"
+  else
+    SINCE=$(date -v-1d -u '+%Y-%m-%dT%H:%M:%SZ')
+    WINDOW_LABEL="the last 24 hours"
+  fi
+
+  # GitHub PR comment window (slightly wider for safety)
+  if [ "$DOW" = "1" ]; then
+    GH_SINCE=$(date -v-4d -u '+%Y-%m-%dT%H:%M:%SZ')
+  else
+    GH_SINCE=$(date -v-2d -u '+%Y-%m-%dT%H:%M:%SZ')
+  fi
+
+---
+
+## FORMATTING RULE — PR and ticket references
+
+When a PR number or ticket key appears **without surrounding context that already makes it
+clear what it is** — e.g. in priority bullets, standup paragraphs, blockers, or free-form
+prose — append a short 2–3 word descriptor in parentheses right after it.
+
+Examples:
+  - "Follow up on PR #1234 (fix panel crash)"
+  - "PROJ-5678 (add color tokens) is blocked on design sign-off"
+
+You do NOT need the descriptor inside dedicated tables (PR Status, tracker) where the title
+column already provides the context.
+
+---
+
+## STEP 2 — Read yesterday's report
+
+Read the file: {{VAULT_PATH}}/Daily/YESTERDAY.md (replace YESTERDAY with the actual date)
+
+If it exists, extract and remember:
+  A. Yesterday's priorities (## ⚡ Priorities Today)
+  B. What the standup said (## 📢 Daily Standup)
+  C. Anything written in the ## 📝 My Updates section — this is the user's own account of
+     what actually happened and is the most important input.
+
+Build a picture of: planned vs done, carry-over items, new context (decisions, blockers,
+completions). If yesterday's file doesn't exist (weekend, first run), skip gracefully.
+
+---
+
+## STEP 3 — Gather live data
+
+### GitHub (if `gh` CLI is configured)
+
+```bash
+# Open PRs with age and review state
+gh pr list --repo {{GITHUB_REPO}} --author "@me" --state open \
+  --json number,title,headRefName,reviewDecision,url,createdAt,isDraft \
+  --jq '.[] | {number, title, branch: .headRefName, review: (.reviewDecision // "PENDING"),
+    draft: .isDraft, url, age_days: ((now - (.createdAt | fromdateiso8601)) / 86400 | floor)}'
+
+# New comments from others — use GH_SINCE computed above
+gh api "repos/{{GITHUB_REPO}}/issues/comments?since=${GH_SINCE}&per_page=50" \
+  --jq '[.[] | select(.user.login != "{{GITHUB_USER}}") | {author:.user.login, url:.html_url, snippet:.body[:200]}]'
+```
+If GitHub isn't configured, skip this section.
+
+### Issue tracker (e.g. Jira) — try MCP
+
+If a Jira/issue-tracker MCP is available, run two queries:
+
+**Query 1 — Active tickets:**
+  JQL: `assignee = "{{USER_EMAIL}}" AND statusCategory != Done ORDER BY updated DESC`
+
+**Query 2 — Recently completed:**
+  JQL: `assignee = "{{USER_EMAIL}}" AND statusCategory = Done AND updated >= -2d ORDER BY updated DESC`
+
+Build three lists: Active, Newly done, New/untracked (active tickets not yet referenced in any
+vault project file). Group by project/theme. If unavailable: note "Tracker requires Claudian session."
+
+### Calendar — try MCP
+If a Calendar MCP is available, list today's events. For each: title, start, end, attendees,
+video link. Note gaps ≥ 90 min, back-to-backs, meetings needing prep.
+If unavailable: note "Calendar requires Claudian session."
+
+### Email — try MCP
+If an Email MCP is available, search for all emails since SINCE. Exclude automated CI/bot
+senders, calendar notifications, newsletters and marketing. For each relevant email: sender,
+subject, one-line summary, whether it needs action. Flag threads where the user got the last
+message and hasn't replied. Note "Covering WINDOW_LABEL" at the top.
+If unavailable: note "Email requires Claudian session."
+
+### Slack / chat — try MCP
+If a Slack MCP is available, scan all activity since SINCE: DMs, @mentions, threads with new
+replies, and relevant broadcast/announcement posts. Summarize each and flag what needs a reply.
+Note "Covering WINDOW_LABEL" at the top.
+If unavailable: note "Slack requires Claudian session."
+
+---
+
+## STEP 4 — Write the daily briefing note
+
+Write to: {{VAULT_PATH}}/Daily/TODAY.md
+
+Be direct, specific, actionable. No filler. Use yesterday's report to ground the standup and
+priorities. Skip any section whose source isn't connected (or mark it "requires Claudian session").
+
+FILE CONTENT:
+
+```markdown
+---
+title: [TODAY_DISPLAY]
+date: [TODAY]
+tags: [daily, briefing]
+---
+
+# [TODAY_DISPLAY]
+
+[[Dashboard|← Dashboard]] · [[Daily/[YESTERDAY]|← Yesterday]] · [[Daily/[TOMORROW]|Tomorrow →]]
+
+---
+
+## ⚡ Priorities Today
+
+[3–5 bullets. First 1–2 = most critical or time-sensitive. Lead with still-relevant
+carry-over items. Be specific: name the PR, the person, the action.]
+
+- [First thing — most critical]
+- [Second]
+- [Third]
+
+---
+
+## 💬 Important Communications
+
+> Covering [WINDOW_LABEL]
+
+**Needs your response:**
+[People waiting on you — DMs, emails, threads, PR comments. Who, where, what, urgency.
+If none: _No responses needed._]
+
+**Reach out proactively:**
+[People to contact first — to unblock, prep a meeting, share status. If none: _No outreach needed today._]
+
+**Announcements & broadcasts:**
+[Company/team-wide posts worth knowing about. If nothing relevant: _No notable announcements._]
+
+---
+
+## 📢 Daily Standup
+
+[Natural first-person language. Short paragraphs, not bullets.]
+
+**Yesterday:** [What actually got done — ground in yesterday's My Updates if available]
+
+**Today:** [What you're focusing on — connect to the priorities above]
+
+**Blockers:** [What you're waiting on. If none: "No blockers."]
+
+---
+
+## 📅 Calendar Roundup
+
+[Events in time order: "HH:MM–HH:MM · Event (attendees)". Then:]
+- **Best focus block:** [Largest gap ≥ 90 min and what to use it for]
+- [Flag back-to-backs / tight transitions / meetings needing prep]
+- [Overall: light / moderate / packed day]
+
+[If unavailable: _Calendar requires Claudian session._]
+
+---
+
+## 📝 My Updates
+
+<!-- Write here during the day. The next morning's briefing reads this section. -->
+
+_Nothing yet._
+
+---
+
+## 🎫 Tracker
+
+[Active tickets table, recently-closed list, and a "needs attention" callout.
+If unavailable: _Tracker requires Claudian session._]
+
+---
+
+## 🔄 PR Status
+
+| PR | Title | Review | Age |
+|----|-------|--------|-----|
+[One row per open PR. ✅ Approved · ⏳ Pending · 🔴 Changes Requested · 📝 Draft]
+
+[New activity since yesterday — bullet per event, or: _No new review activity._]
+
+---
+
+*Generated by the daily briefing · [[Dashboard|Dashboard]]*
+```
+
+---
+
+## STEP 5 — Update Dashboard.md
+
+Read {{VAULT_PATH}}/Dashboard.md then make targeted edits:
+
+- **Header line:** update the date and today's link.
+- **Top Priorities Today:** replace with today's priorities (verbatim from the daily note).
+- **Open Tasks:** for each project subsection, update the Status line, tracker status emojis,
+  PR status emojis, and check off any todos now done. Do not reorder existing todos. Add new
+  subsections for newly-surfaced projects. Mark fully-complete projects with `> ✅ Completed [DATE]`.
+- **My Open PRs table:** replace rows with fresh GitHub data. Drop PRs both closed AND older than 7 days.
+- **Footer:** update `_Last updated: TODAY_`.
+
+Do NOT modify the Projects section, Quick Capture, or any section not listed above.
+
+---
+
+When done, output: "✅ Daily/[TODAY].md written · Dashboard updated"

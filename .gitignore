@@ -1,0 +1,22 @@
+# Generated daily briefing notes (personal data once you start using the vault)
+/Daily/*.md
+!/Daily/.gitkeep
+
+# Personal Obsidian state — keep plugins & config, drop per-machine/workspace state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/bookmarks.json
+.obsidian/graph.json
+.obsidian/cache
+.obsidian/icons/
+
+# Claudian session history & per-machine settings
+.claudian/sessions/
+
+# OS cruft
+.DS_Store
+**/.DS_Store
+
+# Downloaded banner / personal attachments (keep the folder, drop contents)
+/attachments/*
+!/attachments/.gitkeep
