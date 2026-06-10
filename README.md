@@ -7,6 +7,61 @@ and issue tracker.
 
 Run `/setup` to configure this template with your personal information and connect your tools.
 
+---
+
+## 💬 See it in action
+
+> A day with dispatch.md — morning briefing, a quick memory query, end-of-day roundup.
+
+```
+You:       Run a briefing
+
+Dispatch:  Good morning! Here's your Tuesday, June 10 briefing.
+
+           ⚡ Priorities Today
+           1. PR #284 (auth refactor) has two approvals — ready to merge
+           2. Reply to Sarah's DM about the API design question
+           3. Prep for the 2pm architecture review
+
+           📢 Standup
+           Yesterday: shipped the rate-limiting middleware, unblocked the mobile team.
+           Today: merge #284, finish the API spec draft.
+           Blockers: none.
+
+           📅 Calendar — moderate day
+           10:00–10:30  Standup (team)
+           14:00–15:00  Architecture Review  ← prep needed
+           Best focus block: 11:00–13:30
+
+           → Full briefing written to Daily/2026-06-10.md
+```
+
+```
+You:       What did we decide about pagination in the API?
+
+Dispatch:  From Notes/2026-05-28 API Design Session.md —
+           Decision: cursor-based pagination (not offset). Rationale: the dataset
+           grows unboundedly and offset pagination degrades at scale.
+           Owner: you. Status: reflected in the draft spec, not yet in the PR.
+```
+
+```
+You:       /eod
+
+Dispatch:  Hey! Before I update the docs — did #284 actually get merged,
+           or is it still waiting?
+
+You:       Merged. Also had a good architecture review, we agreed on
+           the event-sourcing approach for the notifications service.
+
+Dispatch:  Got it — updating the docs now.
+           ✅ EOD complete. Dashboard and today's note updated.
+           Tomorrow's top priority: open the notifications service ticket
+           and draft the initial schema.
+```
+
+---
+
 > **Do I need Obsidian?** No. The vault is just a folder of Markdown files, and the assistant runs
 > entirely through Claude reading that folder. Obsidian is an optional (but nice) GUI layer that
 > adds live task queries, a calendar, clickable links, and an in-app chat. See
@@ -17,14 +72,15 @@ Run `/setup` to configure this template with your personal information and conne
 ## 🚀 Quick Start
 
 ### 1. Get the vault onto your machine
-- Clone or download this folder somewhere convenient (e.g. `~/Documents/Obsidian/MyJournal`).
+- Clone or download this folder somewhere convenient (e.g. `~/Documents/Obsidian/MyDispatch`).
 
 ### 2. Open it in Claude
 - Point Claude (Claude Code in this folder, or the Claudian Obsidian plugin) at this directory.
-  Claude automatically reads `CLAUDE.md` and becomes your Dispatch assistant."
+  Claude automatically reads `CLAUDE.md` and becomes your Dispatch assistant.
 - Using Obsidian too? Do the one-time [First-time Obsidian setup](#-first-time-obsidian-setup) first.
 
 ### 3. Run the setup command
+In your Claude session (Claude Code CLI or the Claudian Obsidian plugin), type:
 ```
 /setup
 ```
