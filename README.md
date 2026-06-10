@@ -72,7 +72,8 @@ Dispatch:  Got it — updating the docs now.
 - On first open, click **Trust author & enable plugins** — all plugins (Tasks, Calendar, Kanban, the Claudian chat plugin, and more) are pre-bundled and load immediately. See [First-time Obsidian setup](#-first-time-obsidian-setup) for details.
 
 ### 3. Open it in Claude
-- Open a Claude session (Claude Code CLI or the Claudian Obsidian plugin) with this folder as the working directory. Claude automatically reads `CLAUDE.md` and becomes your Dispatch assistant.
+- Open the Claudian plugin inside Obsidian — it's pre-bundled and ready to go. Claude automatically reads `CLAUDE.md` and becomes your Dispatch assistant.
+- No Obsidian? Use the Claude Code CLI with this folder as the working directory.
 
 ### 4. Run the setup command
 In your Claude session, type:
