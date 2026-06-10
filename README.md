@@ -8,19 +8,22 @@ and issue tracker.
 This repository is a **clean template**. Everything personal has been stripped out and replaced
 with `{{PLACEHOLDERS}}`. A guided `/setup` command fills them in for you.
 
+> **Do I need Obsidian?** No. The vault is just a folder of Markdown files, and the assistant runs
+> entirely through Claude reading that folder. Obsidian is an optional (but nice) GUI layer that
+> adds live task queries, a calendar, clickable links, and an in-app chat. See
+> [Using it without Obsidian](#-using-it-without-obsidian) below.
+
 ---
 
 ## 🚀 Quick Start
 
 ### 1. Get the vault onto your machine
 - Clone or download this folder somewhere convenient (e.g. `~/Documents/Obsidian/MyJournal`).
-- Open it as a vault in Obsidian: **Open folder as vault** → pick this folder.
-  - Obsidian may ask to trust and enable community plugins (Tasks, Calendar, Kanban, etc.) —
-    say yes. They're pre-listed in `.obsidian/`.
 
 ### 2. Open it in Claude
-- Point Claude (Claude Code, or the Claudian Obsidian plugin) at this folder as its working
-  directory. Claude automatically reads `CLAUDE.md` and becomes "Claudian."
+- Point Claude (Claude Code in this folder, or the Claudian Obsidian plugin) at this directory.
+  Claude automatically reads `CLAUDE.md` and becomes "Claudian."
+- Using Obsidian too? Do the one-time [First-time Obsidian setup](#-first-time-obsidian-setup) first.
 
 ### 3. Run the setup command
 ```
@@ -36,6 +39,49 @@ That's it — you'll have a working personal assistant in a few minutes.
 
 > Prefer to do it by hand? Open `CLAUDE.md` and replace every `{{PLACEHOLDER}}`, then read
 > `Reference/Claudian Setup.md`.
+
+---
+
+## 🧩 First-time Obsidian setup
+
+This template ships with its plugins **already bundled** in `.obsidian/plugins/` — including the
+**Claudian** plugin (the in-app Claude chat), Tasks, Calendar, Kanban, Omnisearch, and more. You
+do **not** need to download them from the community store. Two one-time steps on first open:
+
+1. **Open the folder as a vault.** In Obsidian: *Open folder as vault* → pick this folder.
+2. **Turn off Restricted Mode.** For safety, Obsidian disables third-party plugins on a new vault
+   and shows a prompt. Click **Trust author & enable plugins**, or go to
+   *Settings → Community plugins → Turn off Restricted Mode*. The bundled plugins then load
+   immediately — no installing required.
+3. **Set up the Claudian plugin.** It's preinstalled but needs access to Claude: install the
+   [`claude` CLI](https://claude.com/claude-code) and sign in. Then open the Claudian panel and
+   point it at this vault as its working directory.
+
+Notes:
+- Bundled plugins are **pinned** to the versions committed here. To get the latest, update them
+  from *Settings → Community plugins* anytime.
+- If you'd rather not use the bundled copies, you can delete `.obsidian/plugins/` and install each
+  plugin fresh from the community store — `community-plugins.json` lists which ones to enable.
+
+---
+
+## 💻 Using it without Obsidian
+
+Everything that makes the assistant work is plain text that Claude reads directly — Obsidian is
+optional:
+
+- **`CLAUDE.md`** is auto-loaded by Claude Code when you run it in this folder. That's what makes
+  Claude behave as "Claudian."
+- **`/setup` and `/eod`** live in `.claude/commands/` and work in any Claude Code session here.
+- **The daily briefing** runs off the `claude` CLI + a scheduler (`setup/`) — it never touches Obsidian.
+- Tasks, projects, and notes are all editable as Markdown in any editor.
+
+What you give up by skipping Obsidian is purely cosmetic/convenience:
+- ` ```tasks ` / ` ```dataview ` blocks render as plain code instead of live, filtered lists.
+- `[[wikilinks]]` aren't clickable; banners, folder icons, Kanban boards, and the calendar don't render.
+- No in-app chat UI — you'd use the Claude Code CLI (or another client) instead of the Claudian plugin.
+
+To use it headless: `git clone`, then run Claude Code in the folder and say *"Run a briefing"* or `/setup`.
 
 ---
 
