@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <!-- Subtle dark-to-navy gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#0A0F1E"/>
+      <stop offset="100%" stop-color="#111C35"/>
+    </linearGradient>
+    <!-- Soft glow on the dot -->
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background — iOS-style rounded square -->
+  <rect width="400" height="400" rx="90" fill="url(#bg)"/>
+
+  <!-- Chevron >
+       Open end: x=114, y=130–270  |  Tip: x=214, y=200
+       Optically balanced — tip sits at visual center (200,200) -->
+  <path d="M 114 130 L 214 200 L 114 270"
+        fill="none" stroke="#F8FAFC" stroke-width="30"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Dot  ·
+       Aligned to chevron baseline (y=270), same level as bottom arm -->
+  <circle cx="268" cy="270" r="21" fill="#60A5FA" filter="url(#glow)"/>
+</svg>
