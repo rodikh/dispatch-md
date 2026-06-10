@@ -5,8 +5,7 @@ dispatch.md turns an [Obsidian](https://obsidian.md) vault into a **work command
 generate a **daily briefing** every morning by pulling from your calendar, email, Slack, GitHub,
 and issue tracker.
 
-This repository is a **clean template**. Everything personal has been stripped out and replaced
-with `{{PLACEHOLDERS}}`. A guided `/setup` command fills them in for you.
+Run `/setup` to configure this template with your personal information and connect your tools.
 
 > **Do I need Obsidian?** No. The vault is just a folder of Markdown files, and the assistant runs
 > entirely through Claude reading that folder. Obsidian is an optional (but nice) GUI layer that
