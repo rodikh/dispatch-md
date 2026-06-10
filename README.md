@@ -62,25 +62,20 @@ Dispatch:  Got it — updating the docs now.
 
 ---
 
-> **Do I need Obsidian?** No. The vault is just a folder of Markdown files, and the assistant runs
-> entirely through Claude reading that folder. Obsidian is an optional (but nice) GUI layer that
-> adds live task queries, a calendar, clickable links, and an in-app chat. See
-> [Using it without Obsidian](#-using-it-without-obsidian) below.
-
----
-
 ## 🚀 Quick Start
 
 ### 1. Get the vault onto your machine
 - Clone or download this folder somewhere convenient (e.g. `~/Documents/Obsidian/MyDispatch`).
 
-### 2. Open it in Claude
-- Point Claude (Claude Code in this folder, or the Claudian Obsidian plugin) at this directory.
-  Claude automatically reads `CLAUDE.md` and becomes your Dispatch assistant.
-- Using Obsidian too? Do the one-time [First-time Obsidian setup](#-first-time-obsidian-setup) first.
+### 2. Open it in Obsidian
+- In Obsidian: *Open folder as vault* → pick this folder.
+- On first open, click **Trust author & enable plugins** — all plugins (Tasks, Calendar, Kanban, the Claudian chat plugin, and more) are pre-bundled and load immediately. See [First-time Obsidian setup](#-first-time-obsidian-setup) for details.
 
-### 3. Run the setup command
-In your Claude session (Claude Code CLI or the Claudian Obsidian plugin), type:
+### 3. Open it in Claude
+- Open a Claude session (Claude Code CLI or the Claudian Obsidian plugin) with this folder as the working directory. Claude automatically reads `CLAUDE.md` and becomes your Dispatch assistant.
+
+### 4. Run the setup command
+In your Claude session, type:
 ```
 /setup
 ```
@@ -94,6 +89,8 @@ That's it — you'll have a working personal assistant in a few minutes.
 
 > Prefer to do it by hand? Open `CLAUDE.md` and replace every `{{PLACEHOLDER}}`, then read
 > `Reference/Dispatch Setup.md`.
+
+> **Don't have Obsidian?** No problem — the assistant runs entirely through Claude reading this folder. See [Using it without Obsidian](#-using-it-without-obsidian) below.
 
 ---
 
@@ -120,10 +117,9 @@ Notes:
 
 ---
 
-## 💻 Using it without Obsidian
+## 💻 Using it without Obsidian *(optional)*
 
-Everything that makes the assistant work is plain text that Claude reads directly — Obsidian is
-optional:
+Obsidian is the recommended interface, but the assistant works just as well from the command line — the vault is plain Markdown files and Claude doesn't need a GUI to read them:
 
 - **`CLAUDE.md`** is auto-loaded by Claude Code when you run it in this folder. That's what makes
   Claude behave as your Dispatch assistant.
