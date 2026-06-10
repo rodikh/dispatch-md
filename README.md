@@ -2,7 +2,7 @@
   <img src="assets/wordmark.svg" alt="dispatch.md" height="72"/>
 </p>
 
-<p align="center">Your personal AI work assistant, living in a notes vault.</p>
+<p align="center">Your personal AI work assistant.</p>
 
 ---
 
