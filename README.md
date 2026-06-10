@@ -214,6 +214,19 @@ setup/                   ← briefing script, prompt, and scheduler (used by /se
 
 ---
 
+## 🔒 Privacy & security
+
+dispatch.md runs **entirely on your machine by default**. Your vault is plain Markdown files on disk — nothing is sent anywhere except to the Claude model during an active session.
+
+- **The vault never leaves your machine.** No built-in sync, no cloud backend, no account required on our end. Use iCloud, Dropbox, or nothing — that's your call.
+- **The daily briefing is local too.** The morning script calls the `claude` CLI directly on your machine. No third-party briefing service involved.
+- **Integrations are opt-in and read-scoped.** Credentials for Calendar, Gmail, Slack, and GitHub live in your Claude client's MCP config or the `gh` CLI keyring — never written into vault files.
+- **No telemetry.** This template has no analytics, tracking, or callbacks.
+
+The one exception: the context you send to Claude during a session is processed by Anthropic's API under their standard [privacy policy](https://www.anthropic.com/privacy).
+
+---
+
 ## 🔁 Sharing this with others
 
 To pass this template on, share this folder **before** running `/setup` (or re-clone a fresh copy).
