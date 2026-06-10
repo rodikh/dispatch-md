@@ -1,4 +1,4 @@
-# 📖 Claudian Setup & Vault Guide
+# 📖 dispatch.md — Setup & Guide
 
 ← [[Dashboard]]
 
@@ -26,7 +26,7 @@ The goal: one place to capture, track, and reflect on all your engineering work 
 
 ## 🤖 How Claude Integration Works
 
-This vault has a `CLAUDE.md` file at its root. When you open a Claude Code session with this vault as the working directory, Claude automatically reads that file and loads it as its operating context. This is what makes Claude behave as "Claudian" — your vault-aware assistant — rather than a generic AI.
+This vault has a `CLAUDE.md` file at its root. When you open a Claude Code session with this vault as the working directory, Claude automatically reads that file and loads it as its operating context. This is what makes Claude behave as your Dispatch assistant — rather than a generic AI.
 
 **`CLAUDE.md` tells Claude:**
 - Your identity and role
@@ -37,7 +37,7 @@ This vault has a `CLAUDE.md` file at its root. When you open a Claude Code sessi
 
 **To customize Claude's behavior**, edit `CLAUDE.md` directly. Changes take effect immediately on the next session.
 
-**`Reference/Claudian Setup.md`** (this file) is the human-readable counterpart — documentation for *you*, not the AI.
+**`Reference/Dispatch Setup.md`** (this file) is the human-readable counterpart — documentation for *you*, not the AI.
 
 ---
 
@@ -153,7 +153,7 @@ Vault Root/
 │   ├── Project.md
 │   └── Meeting Note.md
 └── Reference/            ← How-to docs (like this one)
-    └── Claudian Setup.md
+    └── Dispatch Setup.md
 ```
 
 ---
@@ -193,7 +193,7 @@ Archive files are intentionally excluded from daily briefings and task summaries
 
 ## 🔗 Connected Integrations (Template)
 
-Out of the box, Claudian supports the following integrations via MCP (Model Context Protocol). Configure them in `CLAUDE.md`:
+Out of the box, dispatch.md supports the following integrations via MCP (Model Context Protocol). Configure them in `CLAUDE.md`:
 
 | Integration | What Claude can do |
 |---|---|

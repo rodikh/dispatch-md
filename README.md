@@ -1,6 +1,6 @@
-# 🧭 Claudian — Your Personal AI Work Assistant (Vault Template)
+# 🧭 dispatch.md — Your Personal AI Work Assistant (Vault Template)
 
-Claudian turns an [Obsidian](https://obsidian.md) vault into a **work command center** driven by
+dispatch.md turns an [Obsidian](https://obsidian.md) vault into a **work command center** driven by
 [Claude](https://claude.com/claude-code). It tracks your tasks, projects, and meetings, and can
 generate a **daily briefing** every morning by pulling from your calendar, email, Slack, GitHub,
 and issue tracker.
@@ -22,7 +22,7 @@ with `{{PLACEHOLDERS}}`. A guided `/setup` command fills them in for you.
 
 ### 2. Open it in Claude
 - Point Claude (Claude Code in this folder, or the Claudian Obsidian plugin) at this directory.
-  Claude automatically reads `CLAUDE.md` and becomes "Claudian."
+  Claude automatically reads `CLAUDE.md` and becomes your Dispatch assistant."
 - Using Obsidian too? Do the one-time [First-time Obsidian setup](#-first-time-obsidian-setup) first.
 
 ### 3. Run the setup command
@@ -38,7 +38,7 @@ with `{{PLACEHOLDERS}}`. A guided `/setup` command fills them in for you.
 That's it — you'll have a working personal assistant in a few minutes.
 
 > Prefer to do it by hand? Open `CLAUDE.md` and replace every `{{PLACEHOLDER}}`, then read
-> `Reference/Claudian Setup.md`.
+> `Reference/Dispatch Setup.md`.
 
 ---
 
@@ -71,7 +71,7 @@ Everything that makes the assistant work is plain text that Claude reads directl
 optional:
 
 - **`CLAUDE.md`** is auto-loaded by Claude Code when you run it in this folder. That's what makes
-  Claude behave as "Claudian."
+  Claude behave as your Dispatch assistant.
 - **`/setup` and `/eod`** live in `.claude/commands/` and work in any Claude Code session here.
 - **The daily briefing** runs off the `claude` CLI + a scheduler (`setup/`) — it never touches Obsidian.
 - Tasks, projects, and notes are all editable as Markdown in any editor.
@@ -87,7 +87,7 @@ To use it headless: `git clone`, then run Claude Code in the folder and say *"Ru
 
 ## 🔌 Connecting your tools
 
-Claudian is most useful when it can see your real work. Two kinds of connections:
+dispatch.md is most useful when it can see your real work. Two kinds of connections:
 
 | Tool | How it connects |
 |------|----------------|
@@ -109,7 +109,7 @@ If you enable it during `/setup`, a scheduler runs every workday morning, genera
 
 On macOS these get installed to `~/.local/bin/` and `~/Library/LaunchAgents/`. On Linux, `/setup`
 helps you set up a `cron` job or `systemd --user` timer instead. You can always trigger one
-manually by asking Claudian: **"Run a briefing."**
+manually by asking Dispatch: **"Run a briefing."**
 
 ---
 
@@ -117,7 +117,7 @@ manually by asking Claudian: **"Run a briefing."**
 
 ```
 README.md                ← you are here
-CLAUDE.md                ← Claudian's brain: identity, integrations, rules (templated)
+CLAUDE.md                ← dispatch.md's brain: identity, integrations, rules (templated)
 Dashboard.md             ← your daily home base (starts with a worked example)
 Daily/                   ← one note per day (auto-generated)
 Projects/
@@ -127,7 +127,7 @@ Projects/
 Notes/                   ← meeting notes & one-offs
 Templates/               ← Daily Briefing / Project / Meeting Note templates
 Reference/
-  Claudian Setup.md      ← the full human-readable guide
+  Dispatch Setup.md      ← the full human-readable guide
 setup/                   ← briefing script, prompt, and scheduler (used by /setup)
 .claude/commands/
   setup.md               ← the /setup command
@@ -136,7 +136,7 @@ setup/                   ← briefing script, prompt, and scheduler (used by /se
 
 ---
 
-## 💡 Tips for getting the most out of Claudian
+## 💡 Tips for getting the most out of dispatch.md
 
 1. **Open the Dashboard first thing.** It's the single source of truth for what's in flight.
 2. **Run `/eod` at the end of the day.** A 3-minute interview keeps tomorrow's briefing sharp —
@@ -147,7 +147,7 @@ setup/                   ← briefing script, prompt, and scheduler (used by /se
    are where decisions and history live so you don't have to remember them.
 5. **Link aggressively** with `[[wikilinks]]`. The connections make search and the graph useful.
 6. **Keep `CLAUDE.md` current.** When your team, tools, or focus change, update it — stale config
-   means stale briefings. You can just tell Claudian "update my role to X."
+   means stale briefings. You can just tell Dispatch "update my role to X."
 7. **Talk to it in plain language.** "Summarize my open tasks", "What did I decide about auth?",
    "Create a meeting note for the design review", "Archive the X project."
 8. **Use read-only tokens** and never commit secrets into vault files.

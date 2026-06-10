@@ -17,7 +17,7 @@ updated: 2026-01-01
 ## ⚡ Top Priorities Today
 
 1. **Run `/setup`** to personalize this vault — set your name, role, and connect your tools. ⏫
-2. **Read [[Reference/Claudian Setup|the setup guide]]** to learn how the vault works. 🔼
+2. **Read [[Reference/Dispatch Setup|the setup guide]]** to learn how the vault works. 🔼
 3. **Create your first project note** from the [[Templates/Project|Project template]]. 🔽
 
 ---
@@ -67,4 +67,4 @@ Small one-off tasks that don't belong to a specific project.
 
 ---
 
-_Last updated: 2026-01-01 · [[Reference/Claudian Setup|How to use this vault]]_
+_Last updated: 2026-01-01 · [[Reference/Dispatch Setup|How to use this vault]]_

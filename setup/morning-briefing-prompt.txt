@@ -93,25 +93,25 @@ If a Jira/issue-tracker MCP is available, run two queries:
   JQL: `assignee = "{{USER_EMAIL}}" AND statusCategory = Done AND updated >= -2d ORDER BY updated DESC`
 
 Build three lists: Active, Newly done, New/untracked (active tickets not yet referenced in any
-vault project file). Group by project/theme. If unavailable: note "Tracker requires Claudian session."
+vault project file). Group by project/theme. If unavailable: note "Tracker requires Dispatch session."
 
 ### Calendar — try MCP
 If a Calendar MCP is available, list today's events. For each: title, start, end, attendees,
 video link. Note gaps ≥ 90 min, back-to-backs, meetings needing prep.
-If unavailable: note "Calendar requires Claudian session."
+If unavailable: note "Calendar requires Dispatch session."
 
 ### Email — try MCP
 If an Email MCP is available, search for all emails since SINCE. Exclude automated CI/bot
 senders, calendar notifications, newsletters and marketing. For each relevant email: sender,
 subject, one-line summary, whether it needs action. Flag threads where the user got the last
 message and hasn't replied. Note "Covering WINDOW_LABEL" at the top.
-If unavailable: note "Email requires Claudian session."
+If unavailable: note "Email requires Dispatch session."
 
 ### Slack / chat — try MCP
 If a Slack MCP is available, scan all activity since SINCE: DMs, @mentions, threads with new
 replies, and relevant broadcast/announcement posts. Summarize each and flag what needs a reply.
 Note "Covering WINDOW_LABEL" at the top.
-If unavailable: note "Slack requires Claudian session."
+If unavailable: note "Slack requires Dispatch session."
 
 ---
 
@@ -120,7 +120,7 @@ If unavailable: note "Slack requires Claudian session."
 Write to: {{VAULT_PATH}}/Daily/TODAY.md
 
 Be direct, specific, actionable. No filler. Use yesterday's report to ground the standup and
-priorities. Skip any section whose source isn't connected (or mark it "requires Claudian session").
+priorities. Skip any section whose source isn't connected (or mark it "requires Dispatch session").
 
 FILE CONTENT:
 
@@ -183,7 +183,7 @@ If none: _No responses needed._]
 - [Flag back-to-backs / tight transitions / meetings needing prep]
 - [Overall: light / moderate / packed day]
 
-[If unavailable: _Calendar requires Claudian session._]
+[If unavailable: _Calendar requires Dispatch session._]
 
 ---
 
@@ -198,7 +198,7 @@ _Nothing yet._
 ## 🎫 Tracker
 
 [Active tickets table, recently-closed list, and a "needs attention" callout.
-If unavailable: _Tracker requires Claudian session._]
+If unavailable: _Tracker requires Dispatch session._]
 
 ---
 

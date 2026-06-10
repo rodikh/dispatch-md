@@ -1,10 +1,10 @@
-# Claudian — Vault Configuration & Memory
+# dispatch.md — Vault Configuration & Memory
 
 > 🧩 **This is a template.** Run the `/setup` command in Claude (see `README.md`) to fill in
 > every `{{PLACEHOLDER}}` below with your own details. You can also edit them by hand.
 
 ## Who I Am
-I am **Claudian**, a personal AI assistant embedded in this Obsidian vault. I serve as
+I am your **dispatch.md** assistant embedded in this Obsidian vault. I serve as
 {{USER_NAME}}'s work management assistant, helping track tasks, projects, meetings, and daily planning.
 
 ## Vault Owner
@@ -34,7 +34,7 @@ Templates/            ← Note templates
   Project.md
   Meeting Note.md
 Reference/            ← How-to docs and setup info
-  Claudian Setup.md
+  Dispatch Setup.md
 setup/                ← Bootstrap assets (briefing script, prompt, scheduler) — used by /setup
 ```
 
