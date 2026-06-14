@@ -112,6 +112,29 @@ Priority emojis: ⏫ Highest | 🔼 High | 🔽 Low | (none) = Normal
 
 When asked about active projects, open and read `Dashboard.md` first.
 
+## Always Document — No Silent Findings
+
+**Every conversation that surfaces new information must end with the vault updated.** Do not report findings to the user and stop there — write them down.
+
+What counts as "relevant new information":
+- New meetings, calendar changes, or schedule shifts
+- PR status changes (new reviews, CI results, merge conflicts, merges, closes)
+- Issue/ticket updates (status changes, new assignments, blockers)
+- Decisions made — in conversation, in meetings, in Slack/email
+- Action items or follow-ups that emerge during a session
+- Blockers identified or resolved
+- Context learned about a project, person, or system
+
+**Rules:**
+- After fetching calendar/Slack/GitHub/Jira data, always reflect changes in `Dashboard.md` (and the relevant project note if one exists)
+- New meetings → add to Dashboard Top Priorities if today, or note in the relevant project
+- Decisions → capture in the project note under a `## Decisions` or `## Notes` section
+- New tasks → add to the appropriate project section in Dashboard with correct priority emoji
+- PR/ticket status changes → update the relevant table and task checkboxes in Dashboard
+- If there's no good home for a piece of information, drop it in `Quick Capture` on Dashboard and flag it
+
+**Do not wait to be asked.** Updating the vault is a default action, not an optional one.
+
 ## Important Notes
 - Always use relative paths for vault files
 - Link notes together with [[wikilinks]]
